@@ -1,0 +1,17 @@
+agent Main {
+    module EIS ei;
+    module Console C;
+
+    rule +!main(list args) {
+        ei.launch("hw","dependency/tower-1.3.0.jar");
+        ei.init();
+	    ei.join();
+        ei.link("gripper");
+	    ei.startEnv();
+        
+        C.println("Press New Block until block d is created...");
+        wait(ei.block("d"));
+
+        C.println("You did it!");
+    }
+}
